@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../components/button.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class homePage extends StatefulWidget {
   @override
@@ -89,11 +90,11 @@ class _homePageState extends State<homePage> {
                               });
                             } ,
                             value: buttons[index],
-                            color: isOperator(buttons[index])? Colors.black: Colors.grey[800],
-                            textColor: Colors.white,);
+                            color: Colors.black,
+                            textColor: Colors.redAccent,);
                         }
 
-                        if (index==1){
+                        else if (index==1){
                           return Buttons(
                             buttonTapped:(){
                               setState(() {
@@ -101,8 +102,20 @@ class _homePageState extends State<homePage> {
                               });
                             } ,
                             value: buttons[index],
-                            color: isOperator(buttons[index])? Colors.black: Colors.grey[800],
-                            textColor: Colors.white,);
+                            color: Colors.black,
+                            textColor: Colors.redAccent,);
+                        }
+
+                        else if (index==buttons.length-1){
+                          return Buttons(
+                            buttonTapped:(){
+                              setState(() {
+                                eqpressed();
+                              });
+                            } ,
+                            value: buttons[index],
+                            color: Colors.black,
+                            textColor: Colors.lightGreenAccent,);
                         }
 
                         else {
@@ -116,10 +129,6 @@ class _homePageState extends State<homePage> {
                             color: isOperator(buttons[index])? Colors.black: Colors.grey[800],
                             textColor: Colors.white,);
                         }
-                        // return Buttons(
-                        //   value: buttons[index],
-                        //   color: isOperator(buttons[index])? Colors.black: Colors.grey[800],
-                        //   textColor: Colors.white,);
                       }
                   ),
                 ),
@@ -139,5 +148,17 @@ class _homePageState extends State<homePage> {
     }else{
       return false;
     }
+  }
+
+  eqpressed(){
+    String FinalProblem = userProblem;
+    FinalProblem = FinalProblem.replaceAll("x", "*");
+
+    Parser p = Parser();
+    Expression exp = p.parse(FinalProblem);
+    ContextModel cm = ContextModel();
+    double eval = exp.evaluate(EvaluationType.REAL, cm);
+
+    answer = eval.toString();
   }
 }
