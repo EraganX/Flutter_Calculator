@@ -42,7 +42,7 @@ class _homePageState extends State<homePage> {
                           child: Text(
                             userProblem,
                             style: TextStyle(
-                              fontSize: 30
+                              fontSize: 40
                             ),
                           )
                       ),
@@ -61,7 +61,7 @@ class _homePageState extends State<homePage> {
                           child: Text(
                             answer,
                             style: TextStyle(
-                                fontSize: 30
+                                fontSize: 40,
                             ),
                           )
                       ),
